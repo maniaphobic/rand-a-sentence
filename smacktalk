@@ -12,7 +12,7 @@ import sys
 #
 #
 
-version				= 'InDev Version 1.5'
+version				= 'InDev Version 2'
 
 nouns				= [
     'milkshake',
@@ -84,9 +84,8 @@ adjectives			= [
     'hairy',
     'moldy',
     'tubular',
-    'extreme',
-    'epic',
-    'LOLS',
+    'extreme',  
+    
 ]
 
 
@@ -119,6 +118,8 @@ articles			= [
     "Your sister's",
     "Your brother's",
     'My',
+    "Your grandmother's",
+    "Your grandfather's",
 ]
 
 prepositions			= [
@@ -131,30 +132,47 @@ prep_nouns			= [
     'flames'
 ]
 
+LOLZ				= [
+    'LOLZ',
+    'Kit kat',
+    'EPICNESS',
+    'BANANAZ',
+    'PEANUT BUTER JELLY TIME!!',
+    'CHEZBURGER',
+    'CREEPERS GONA CREEP',
+    'BLENDERZ',
+    'VEGIBURGERZ',
+]
 #
 #
 #
+
+def choose_from_list(list):
+    return list[random.randint(0,len(list)-1)]
 
 def choose_noun():
-    return nouns[random.randint(0,len(nouns)-1)]
+    return choose_from_list(nouns)
 
 def choose_article():
-    return articles[random.randint(0,len(articles)-1)]
+    return choose_from_list(articles)
 
 def choose_verb():
-    return verbs[random.randint(0,len(verbs)-1)]
+    return choose_from_list(verbs)
 
 def choose_adjective():
-    return adjectives[random.randint(0,len(adjectives)-1)]
+    return choose_from_list(adjectives)
 
 def choose_adverb():
-    return adverbs[random.randint(0,len(adverbs)-1)]
+    return choose_from_list(adverbs)
 
 def choose_preposition():
-    return prepositions[random.randint(0,len(prepositions)-1)]
+    return choose_from_list(prepositions)
 
 def choose_prep_noun():
-    return prep_nouns[random.randint(0,len(prep_nouns)-1)]
+    return choose_from_list(prep_nouns)
+
+def choose_lol():
+    return choose_from_list(LOLZ)
 
 def display_credits():
     print("-=[ Rand-a-Sentence ]=-\n%s" % (version))
@@ -167,6 +185,8 @@ def display_help():
     print("""-=[ Help ]=-
 
 This application displays random sentences.
+Recent Updates: LOLZ Words randomly inserted.
+Upcoming updates: Menu and Achevements.
 
 Controls:
 
@@ -188,16 +208,27 @@ display_credits()
 display_help()
 
 count				= 1
+
 while True:
-    print("(%d) %s %s %s %s %s." % (
-        count,
+
+    sentence			= [
         choose_article(),
         choose_adjective(),
         choose_noun(),
         choose_verb(),
         choose_adverb(),
+    ]
+
+    if random.random() < 0.03:
+        sentence.insert(random.randint(0,len(sentence)-1),choose_lol())
+
+    print("(%d) %s." % (
+        count,
+        ' '.join(sentence)
     ))
+
     input			= sys.stdin.readline()
+
     if input == "c\n" or input == "r\n":
         os.system("clear")
         count			= 0
@@ -206,6 +237,7 @@ while True:
         display_help()
     elif input == "q\n":
         exit()
+
     count			+= 1
 
 
