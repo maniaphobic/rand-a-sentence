@@ -1,0 +1,214 @@
+#!/usr/bin/python3
+
+#
+#
+#
+
+import os
+import random
+import sys
+
+#
+#
+#
+
+version				= 'InDev Version 1.5'
+
+nouns				= [
+    'milkshake',
+    'rock',
+    'barbequeue',
+    'brontosaurus',
+    'Tyrannosaurus Rex',
+    'soda',
+    'microwave',
+    'oven',
+    'toilet',
+    'sink',
+    'TV',
+    'camera',
+    'Cheerios',
+    'airplane',
+    'nose',
+    'egg',
+    'heat',
+    'bunny',
+    'chainsaw',
+    'flamethrower',
+    'binoculars',
+    'telescope',
+    'iPod',
+    'clock',
+    'fireplace',
+    'big rig',
+    'truck',
+    'car',
+    'iPad',
+    'newspaper',
+    'printer',
+]
+
+verbs				= [
+    'explodes',
+    'flies',
+    'falls',
+    'crawls',
+    'crashes',
+    'flushes',
+    'overflows',
+    'bloats',
+    'shrieks',
+    'eats',
+    'grills',
+    'ages',
+    'bursts',
+    'burns',
+    'holds',
+    'wields',
+    'cooks',
+    'reads',
+    'gasps',  
+]
+
+adjectives			= [
+    'delicious',
+    'pointy',
+    'bright',
+    'ugly',
+    'stupid',
+    'poor',
+    'expensive',
+    'moist',
+    'runny',
+    'metallic',
+    'hairy',
+    'moldy',
+    'tubular',
+    'extreme',
+    'epic',
+    'LOLS',
+]
+
+
+
+
+adverbs				= [
+    'outrageously',
+    'mathematically',
+    'unwisely',
+    'wisely',
+    'blindly',
+    'weakly',
+    'strongly',
+    'pathetically',
+    'theoretically',
+    'mysteriously',
+    'provocatively',
+    'stunningly',
+    'magically',
+    'wildly',
+    'logically',
+    'illogically',
+]
+
+articles			= [
+    'The',
+    'Your',
+    "Your mother's",
+    "Your father's",
+    "Your sister's",
+    "Your brother's",
+    'My',
+]
+
+prepositions			= [
+    'into',
+    'out of',
+]
+
+prep_nouns			= [
+    'pieces',
+    'flames'
+]
+
+#
+#
+#
+
+def choose_noun():
+    return nouns[random.randint(0,len(nouns)-1)]
+
+def choose_article():
+    return articles[random.randint(0,len(articles)-1)]
+
+def choose_verb():
+    return verbs[random.randint(0,len(verbs)-1)]
+
+def choose_adjective():
+    return adjectives[random.randint(0,len(adjectives)-1)]
+
+def choose_adverb():
+    return adverbs[random.randint(0,len(adverbs)-1)]
+
+def choose_preposition():
+    return prepositions[random.randint(0,len(prepositions)-1)]
+
+def choose_prep_noun():
+    return prep_nouns[random.randint(0,len(prep_nouns)-1)]
+
+def display_credits():
+    print("-=[ Rand-a-Sentence ]=-\n%s" % (version))
+    sys.stdin.readline()
+    print("""Progamming and ideas 
+by Nerf259 & mANIApHOBIC""")
+    sys.stdin.readline()
+
+def display_help():
+    print("""-=[ Help ]=-
+
+This application displays random sentences.
+
+Controls:
+
+    - Press Enter to see the next.
+    - Press c+Enter or r+Enter to reset.
+    - Press h+Enter or ?+Enter to display this help.
+    - Press q+Enter to quit.
+
+Press Enter to continue.
+""")
+    sys.stdin.readline()
+    os.system("clear")
+
+#
+#
+#
+
+display_credits()
+display_help()
+
+count				= 1
+while True:
+    print("(%d) %s %s %s %s %s." % (
+        count,
+        choose_article(),
+        choose_adjective(),
+        choose_noun(),
+        choose_verb(),
+        choose_adverb(),
+    ))
+    input			= sys.stdin.readline()
+    if input == "c\n" or input == "r\n":
+        os.system("clear")
+        count			= 0
+        display_credits()
+    elif input == "h\n" or input == "?\n":
+        display_help()
+    elif input == "q\n":
+        exit()
+    count			+= 1
+
+
+
+
+
