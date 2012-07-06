@@ -134,7 +134,7 @@ prep_nouns			= [
 
 LOLZ				= [
     'LOLZ',
-    'Kit kat',
+    'KIT KAT',
     'EPICNESS',
     'BANANAZ',
     'PEANUT BUTER JELLY TIME!!',
@@ -142,10 +142,67 @@ LOLZ				= [
     'CREEPERS GONA CREEP',
     'BLENDERZ',
     'VEGIBURGERZ',
+    'SUPER TOILET',
+    'WAFLZ',
+    'NYAN CAT',
+    'CHICKEN WAFLE',
+    'OMG HAX!!',
 ]
+
 #
 #
 #
+
+def run_game():
+    count			= 1
+
+    while True:
+
+        sentence		= [
+            choose_article(),
+            choose_adjective(),
+            choose_noun(),
+            choose_verb(),
+            choose_adverb(),
+        ]
+
+        if random.random() < lolz_chance():
+            sentence.insert(random.randint(0,len(sentence)-1),choose_lol())
+
+        print("(%d) %s." % (
+            count,
+            ' '.join(sentence)
+        ))
+
+        handle_input()
+
+        count			+= 1
+
+def handle_input():
+    input			= sys.stdin.readline()
+    input			= input.rstrip()
+    if input == 's' or input == 'S':
+        run_game()
+    elif input == 'c' or input == 'r':
+        os.system("clear")
+        display_credits()
+        run_game()
+    elif input == 'h' or input == '?':
+        display_help()
+        run_game()
+    elif input == 'l' or input == 'L':
+        global lolz_mode
+        lolz_mode		= not lolz_mode
+        run_game()
+    elif input == 'm' or input == 'M':
+        display_menu()
+        handle_input()
+    elif input == 'o' or input == 'O':
+        display_options()
+        display_menu()
+        handle_input()
+    elif input == 'q':
+        exit()
 
 def choose_from_list(list):
     return list[random.randint(0,len(list)-1)]
@@ -172,7 +229,7 @@ def choose_prep_noun():
     return choose_from_list(prep_nouns)
 
 def choose_lol():
-    return choose_from_list(LOLZ)
+    return '-- ' + choose_from_list(LOLZ) + '! --' 
 
 def display_credits():
     print("-=[ Rand-a-Sentence ]=-\n%s" % (version))
@@ -181,8 +238,19 @@ def display_credits():
 by Nerf259 & mANIApHOBIC""")
     sys.stdin.readline()
 
+def display_menu():
+    print("""
+[ MENU ]
+
+(S)tart game
+(H)elp
+(O)ptions
+(Q)uit
+
+""")
+
 def display_help():
-    print("""-=[ Help ]=-
+    print("""-=[ Help and News ]=-
 
 This application displays random sentences.
 Recent Updates: LOLZ Words randomly inserted.
@@ -192,6 +260,8 @@ Controls:
 
     - Press Enter to see the next.
     - Press c+Enter or r+Enter to reset.
+    - Press m+Enter to view the menu.
+    - Press l+Enter to toggle LOLZ mode.
     - Press h+Enter or ?+Enter to display this help.
     - Press q+Enter to quit.
 
@@ -200,47 +270,25 @@ Press Enter to continue.
     sys.stdin.readline()
     os.system("clear")
 
+def display_options():
+    print("""[ OPTIONS ]
+
+LOLZ mode is %d
+"""  % (lolz_mode))
+
+def lolz_chance():
+    chance			= 0.03
+    if lolz_mode:
+        chance			= 1.0
+    return chance
+
 #
 #
 #
+
+lolz_mode			= False
 
 display_credits()
-display_help()
-
-count				= 1
-
-while True:
-
-    sentence			= [
-        choose_article(),
-        choose_adjective(),
-        choose_noun(),
-        choose_verb(),
-        choose_adverb(),
-    ]
-
-    if random.random() < 0.03:
-        sentence.insert(random.randint(0,len(sentence)-1),choose_lol())
-
-    print("(%d) %s." % (
-        count,
-        ' '.join(sentence)
-    ))
-
-    input			= sys.stdin.readline()
-
-    if input == "c\n" or input == "r\n":
-        os.system("clear")
-        count			= 0
-        display_credits()
-    elif input == "h\n" or input == "?\n":
-        display_help()
-    elif input == "q\n":
-        exit()
-
-    count			+= 1
-
-
-
-
+display_menu()
+handle_input()
 
